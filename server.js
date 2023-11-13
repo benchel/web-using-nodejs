@@ -4,10 +4,12 @@ const mysql = require('mysql');
 const app = express();
 const port = 8033;
 
+app.set('views', __dirname + '/view');
+app.set('view engine', 'ejs');
+
 app.get('/', (req, res) => {
-    res.json({
-        success: true,
-    });
+    // res.json({ success: true, });
+    res.render('index.ejs');
 });
 
 app.listen(port, () => {
