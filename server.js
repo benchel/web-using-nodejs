@@ -2,7 +2,7 @@ const express = require('express');
 const mysql = require('mysql');
 
 const app = express();
-const port = process.env.PORT || 8033;
+const port = 8033;
 
 app.get('/', (req, res) => {
     res.json({
