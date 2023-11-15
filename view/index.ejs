@@ -3,9 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="common.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/common.css">
     <title>Document</title>
 </head>
+<script>
+    const db = require("../server.js");
+
+    db.getConnection((error, connect) => {
+        if(error) throw error;
+        else {
+            connect.query('SELECT * FROM board', (error, results) => {
+                if(error) throw error;
+                else console.log(results);
+            });
+            connect.release();
+        }
+    });    
+</script>
 <body>
     <div id="wrap">
         

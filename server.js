@@ -3,17 +3,17 @@ const mysql = require('mysql');
 
 const app = express();
 const port = 8033;
+app.listen(port, () => {
+    console.log(`server is listening at localhost:${process.env.PORT}`);
+});
 
 app.set('views', __dirname + '/view');
 app.set('view engine', 'ejs');
+app.use('/static', express.static('static'));
 
 app.get('/', (req, res) => {
     // res.json({ success: true, });
     res.render('index.ejs');
-});
-
-app.listen(port, () => {
-    console.log(`server is listening at localhost:${process.env.PORT}`);
 });
 
 // DB poll 생성 
@@ -25,14 +25,5 @@ const db = mysql.createPool({
     connectionLimit : '' // 연결제한수
 });
 
-db.getConnection((error, connect) => {
-    if(error) throw error;
-    else {
-        connect.query('SELECT * FROM board', (error, results) => {
-            if(error) throw error;
-            else console.log(results);
-        });
-        connect.release();
-    }
-});
+module.exports = { db };
 
